@@ -21,18 +21,17 @@ import WebSocket, { WebSocketServer } from "ws";
 // server.listen(8003 , () => console.log((new Date()) + "Hello from server"))
 import express from "express";
 const app = express();
-const httpServer = app.listen(8002, () =>
-  console.log(new Date() + " Hello from Server")
-);
+const httpServer = app.listen(3000, () => console.log((new Date()) + "Hello from server"));
 const wss = new WebSocketServer({ server: httpServer });
-wss.on("connection", (socket) => {
-  socket.on("error", (err) => console.log(err));
-  socket.on("message", (data) => {
-    wss.clients.forEach((client) => {
-      if (client != socket && client.readyState === WebSocket.OPEN) {
-        client.send(data.toString());
-      }
+wss.on('connection', (socket) => {
+    wss.on("error", (err) => console.log(err));
+    wss.on('message', (data) => {
+        wss.clients.forEach((client) => {
+            if (client != socket && client.readyState === WebSocket.OPEN) {
+                client.send(data.toString());
+            }
+        });
     });
-  });
-  socket.send("WSS server is connected");
+    socket.send("WSS server is connected");
 });
+//# sourceMappingURL=index.js.map

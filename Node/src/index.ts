@@ -27,7 +27,7 @@ import WebSocket , {WebSocketServer} from "ws"
 import express from "express"
 
 const app = express();
-const httpServer = app.listen(8002)
+const httpServer = app.listen(3000 , () => console.log((new Date()) + "Hello from server"))
 
 const wss = new WebSocketServer({server : httpServer})
 
