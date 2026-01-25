@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import { createClient } from "redis";
 const app = express();
 
-const client = createClient()
+const client = await createClient()
   .on("error", (err) => console.log("ERROR : ", err))
   .connect();
 
